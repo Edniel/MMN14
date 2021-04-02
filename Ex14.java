@@ -210,4 +210,29 @@ public class Ex14
         }
         return true;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+   public static boolean isPermutation(int[] a,int[] b){
+     return isPermutation(a,b,0,0);  
+   }
+   private static boolean isPermutation(int[] a,int[] b,int ind,int temp){
+       if(ind==a.length)
+           return true;
+       if(temp==b.length)
+           return false;
+       if(a[ind]==b[temp])
+           return isPermutation(a,b,ind+1,0);
+       return isPermutation(a,b,ind,temp+1);
+       
+   }
+    
+    
+    
+    
 }

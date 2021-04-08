@@ -60,104 +60,45 @@ public class Ex14
                 return temp; 
         return -1;
     }
+public static int size(boolean[][] mat,int x,int y){
+        if(x<0 || x>=mat.length || y<0 || y>=mat[0].length || mat[x][y]!=true) 
+            return 0;
+        int sum=1;
+        mat[x][y]=false;
+        //x++,y++
+        if(x<mat.length-1 && y<mat[0].length-1 && mat[x+1][y+1]==true)
+            sum+=size(mat,x+1,y+1);
 
-    public static int size0(boolean[][] mat,int x,int y){
-        int sum=0;
-        if(x<0 || y<0|| x>=mat.length || y>=mat[0].length || mat[x][y]==false)
-            return sum;
-        sum++;
-        //0--> x-1
-        if(x>0 && mat[x-1][y]==true){
-            sum+=size0(mat,x,y,0);
-        }
-        //1-->y-1
-        if(y>0 && mat[x][y-1]==true){
-            sum+=size0(mat,x,y,1);
-        }
-        //2-->x+1
-        if(x<mat.length-1 && mat[x+1][y]==true){
-            sum+=size0(mat,x,y,2);
-        }
-        //3-->y+1
-        if(y<mat[0].length-1 && mat[x][y+1]==true){
-            sum+=size0(mat,x,y,3);
-        }
-        //4-->x+1, y+1
-        if(y<mat[0].length-1 && x<mat.length-1 && mat[x+1][y+1]==true){
-            sum+=size0(mat,x,y,4);
-        }
-        //5--> x+1,y-1
-        if(y>0 && x<mat.length-1 && mat[x+1][y-1]==true){
-            sum+=size0(mat,x,y,5);
-        }
-        //6--> x-1,y-1
-        if(y>0 && x>0 && mat[x-1][y-1]==true){
-            sum+=size0(mat,x,y,6);
-        }
-        if(y<mat[0].length-1 && x>0 && mat[x-1][y+1]==true){
-            sum+=size0(mat,x,y,7);
-        }
-        System.out.println("Sum is:"+sum);
+        //x++
+        if(x<mat.length-1 && mat[x+1][y]==true)
+            sum+=size(mat,x+1,y);
+
+        //y++
+        if(y<mat[0].length-1 && mat[x][y+1]==true)
+            sum+=size(mat,x+1,y);
+
+        //x--,y++
+        if(x>0 && y<mat[0].length-1 && mat[x-1][y+1]==true)
+            sum+=size(mat,x-1,y+1);
+
+        //x--,y--
+        if(x>0 && y>0 && mat[x-1][y-1]==true)
+            sum+=size(mat,x-1,y-1);
+
+        //x--
+        if(x>0 && mat[x-1][y]==true)
+            sum+=size(mat,x-1,y);
+
+        //y--
+        if(y>0 && mat[x][y-1]==true)
+            sum+=size(mat,x,y-1);
+
+        //x++,y--
+        if(x<mat.length-1 && y>0 && mat[x+1][y-1]==true)
+            sum+=size(mat,x+1,y-1);
+
         return sum;
     }
-
-    private static int size0(boolean[][] mat,int x,int y,int num){
-        int sum=0;
-        System.out.println("num is:"+num);
-        switch(num){
-            //x--> x-1
-            case 0:if(x>0 && mat[x-1][y]==true){
-                sum++;
-                sum+=size0(mat,x-1,y,0);
-
-            }break;
-            //y--> y-1
-            case 1:if(y>0 && mat[x][y-1]==true){
-                sum++;
-                sum+=size0(mat,x,y-1,1);
-
-            }break;
-
-            case 2:if(x<mat.length-1 && mat[x+1][y]==true){
-                sum++;
-                sum+=size0(mat,x+1,y,2);
-
-            }break;
-
-            case 3:if(y<mat[0].length-1 && mat[x][y+1]==true){
-                sum++;
-                sum+=size0(mat,x,y+1,3);
-
-            }break;
-
-            case 4:if(y<mat[0].length-1 && x<mat.length-1 && mat[x+1][y+1]==true){
-                sum++;
-                sum+=size0(mat,x+1,y+1,4);
-
-            }break;
-
-            case 5:if(y>0 && x<mat.length-1 && mat[x+1][y-1]==true){
-                sum++;
-                sum+=size0(mat,x+1,y-1,5);
-
-            }break;
-
-            case 6:if(y>0 && x>0 && mat[x-1][y-1]==true){
-                sum++;
-                sum+=size0(mat,x-1,y-1,6);
-
-            }break;
-
-            case 7:if(y<mat[0].length-1 && x>0 && mat[x-1][y+1]==true){
-                sum++;
-                sum+=size0(mat,x-1,y+1,7);
-
-            }break;
-        }
-        System.out.println(sum);
-        return sum;
-    }
-
     /**
      * This method
      * @param
